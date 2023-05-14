@@ -1,44 +1,35 @@
+#MyHashTable
+___
+##Fields
+___
+`chainArray` - Array to hold chains
 
-public class MyHashTable <K, V> {
-    private class HashNode<K, V> {
-        private K key;
-        private V value;
-        // To create a new HashNode with the given key-value pair
-        private HashNode<K, V> next;
-        public HashNode(K key, V value) {
-            this.key = key;
-            this.value = value;
-        }
-        @Override
-        public String toString(){
-            return "{" + key + " " + value + "}";
-        }
-    }
+`M` - Number of chains
 
-    // The chainArray is an array of HashNode objects that serves as the underlying data structure for the hash table
-    private HashNode<K, V>[] chainArray;
-    private int M = 11; // Default node array size
-    private int size; // The size variable keeps track of the number of elements in the hash table
+`size` - size of the hash table, number of elements in all the chains
+```java
+private HashNode<K, V>[] chainArray;
+private int M = 11;
+private int size = 0;
+```
+##Private Methods
+___
+`hash(K key)`
 
-
-    // To create a new hash table with the default number of buckets
-    public MyHashTable() {
-        chainArray = new HashNode[M];
-        size = 0;
-    }
-    // To create a new hash table with the specified number of buckets
-    public MyHashTable(int M) {
-        this.M = M;
-        chainArray = new HashNode[M];
-        size = 0;
-    }
-    // Takes a key and returns an integer between 0 and M-1 to represent the bucket index
+Description: Returns the bucket index for a given key of type K in the hash table, by performing a bitwise AND operation with 0x7fffffff to ensure a non-negative value, and then taking the modulus of that value with M.
+```java
     private int hash(K key)
     {
         return (key.hashCode() & 0x7fffffff) % M;
     }
 
-    // Adds a key-value pair to the hash table
+```
+##Public Methods
+___
+`put(K key, V value)`
+
+Description: Adds a new key-value pair to the hash table
+```java
     public void put(K key, V value) {
         int index = hash(key);
         HashNode<K, V> node = chainArray[index];
@@ -54,7 +45,12 @@ public class MyHashTable <K, V> {
         chainArray[index] = newNode;
         size++;
     }
-    // Returns the value associated with the specified key in the hash table
+```
+___
+`get(K key)`
+
+Description:  Retrieve the value associated with a given key
+```java
     public V get(K key) {
         int index = hash(key);
         HashNode<K, V> node = chainArray[index];
@@ -66,7 +62,11 @@ public class MyHashTable <K, V> {
         }
         return null;
     }
-    // Removes the key-value pair associated with the specified key from the hash table
+```
+___
+`remove(K key)`
+Description: Remove a key-value pair corresponding to a given key
+```java
     public V remove(K key) {
         int index = hash(key);
         HashNode<K, V> prev = null;
@@ -86,7 +86,11 @@ public class MyHashTable <K, V> {
         }
         return null;
     }
-    // Return true if the hash table contains the specified value
+```
+___
+`contains(V value)`
+Description: Checks if the hash table contains a node with the given value
+```java
     public boolean contains(V value) {
         for (int i = 0; i < M; i++) {
             HashNode<K, V> node = chainArray[i];
@@ -99,6 +103,11 @@ public class MyHashTable <K, V> {
         }
         return false;
     }
+```
+`getKey(V value)`
+
+Description: Retrieves the key associated with a given value
+```java
     public K getKey(V value) {
         for (int i = 0; i < M; i++) {
             HashNode<K, V> node = chainArray[i];
@@ -111,10 +120,4 @@ public class MyHashTable <K, V> {
         }
         return null;
     }
-    public HashNode<K, V>[] getChainArray() {
-        return chainArray;
-    }
-
-}
-
-
+```
