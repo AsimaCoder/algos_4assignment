@@ -15,27 +15,30 @@ public class MyHashTable <K, V> {
         }
     }
 
-
+    // The chainArray is an array of HashNode objects that serves as the underlying data structure for the hash table
     private HashNode<K, V>[] chainArray;
-    private int M = 11; // Defalt node array size
-    private int size;
+    private int M = 11; // Default node array size
+    private int size; // The size variable keeps track of the number of elements in the hash table
 
 
-
+    // To create a new hash table with the default number of buckets
     public MyHashTable() {
         chainArray = new HashNode[M];
         size = 0;
     }
-
+    // To create a new hash table with the specified number of buckets
     public MyHashTable(int M) {
         this.M = M;
         chainArray = new HashNode[M];
         size = 0;
     }
-    private int hash(K key) {
+    // Takes a key and returns an integer between 0 and M-1 to represent the bucket index
+    private int hash(K key)
+    {
         return (key.hashCode() & 0x7fffffff) % M;
     }
 
+    // Adds a key-value pair to the hash table
     public void put(K key, V value) {
         int index = hash(key);
         HashNode<K, V> node = chainArray[index];
