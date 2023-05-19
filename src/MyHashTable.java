@@ -86,6 +86,22 @@ public class MyHashTable <K, V> {
         }
         return null;
     }
+    public K replace(V oldValue, V newValue){
+        int index = hash(value);
+        prev.next = curr.next;
+         while (node != null);
+         return true;
+         size--;
+         node = node.next;
+         if node
+
+        }
+
+
+
+
+
+    }
     // Return true if the hash table contains the specified value
     public boolean contains(V value) {
         for (int i = 0; i < M; i++) {
@@ -99,6 +115,7 @@ public class MyHashTable <K, V> {
         }
         return false;
     }
+
     public K getKey(V value) {
         for (int i = 0; i < M; i++) {
             HashNode<K, V> node = chainArray[i];
@@ -111,6 +128,7 @@ public class MyHashTable <K, V> {
         }
         return null;
     }
+
     public HashNode<K, V>[] getChainArray() {
         return chainArray;
     }
