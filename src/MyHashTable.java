@@ -86,16 +86,20 @@ public class MyHashTable <K, V> {
         }
         return null;
     }
-    public K replace(V oldValue, V newValue){
-        int index = hash(value);
-        prev.next = curr.next;
-         while (node != null);
-         return true;
-         size--;
-         node = node.next;
-         if node
-
+    public K replace(V oldValue, V newValue) {
+        for (int i = 0; i < M; i++) {
+            HashNode<K, V> node = chainArray[i];
+            while (node != null) {
+                if (node.value.equals(oldValue)) {
+                    node.value = newValue;
+                    return node.key;
+                }
+                node = node.next;
+            }
         }
+        return null;
+    }
+
 
 
 

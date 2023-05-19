@@ -23,6 +23,19 @@ public class Main {
                 node = node.getNext();
             }
         }
+        MyTestingClass searchKey = new MyTestingClass(42, "Name_42");
+        String oldValue = "Value_42";
+        String newValue = "New_Value_42";
+
+        K replacedKey = table.replace(oldValue, newValue);
+        if (replacedKey != null) {
+            System.out.println("Replaced value for key: " + replacedKey);
+        } else {
+            System.out.println("Value not found in the hash table.");
+        }
+
+        String valueForKey = table.get(searchKey);
+        System.out.println("Value for key " + searchKey + ": " + valueForKey);
 
 
         for (int i = 0; i < bucketSizes.length; i++) {
